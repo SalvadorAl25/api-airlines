@@ -5,6 +5,7 @@ import com.airline.checkin.services.BoardingPassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,12 @@ public class BoardingPassController {
     @GetMapping(path = "boardingPass/{boardingPassId}")
     public Optional<BoardingPassEntity> findById(@PathVariable("boardingPassId") Integer boardingPassId) {
         return boardingPassService.findById(boardingPassId);
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "boardingPass/flight/{flightId}")
+    public List<BoardingPassEntity> findByFlightId(@PathVariable("flightId") Integer flightId) {
+        return boardingPassService.findByFlightId(flightId);
     }
 
     @CrossOrigin

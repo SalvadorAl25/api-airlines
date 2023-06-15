@@ -23,8 +23,6 @@ public class FlightController {
     @CrossOrigin
     @GetMapping(path = "flight/{flightId}")
     public Optional<FlightEntity> findById(@PathVariable("flightId") Integer flightId) {
-        Optional<FlightEntity> flight = flightService.findById(flightId);
-        System.out.println(flight);
         return flightService.findById(flightId);
     }
 
