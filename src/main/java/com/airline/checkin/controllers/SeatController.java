@@ -5,6 +5,7 @@ import com.airline.checkin.services.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,12 @@ public class SeatController {
     @GetMapping(path = "seat/{seatId}")
     public Optional<SeatEntity> findById(@PathVariable("seatId") Integer seatId) {
         return seatService.findById(seatId);
+    }
+
+    @CrossOrigin
+    @GetMapping(path = "seatype={seatTypeId}&airplane={airplaneId}")
+    public List<Integer> allSeatsForType(@PathVariable("seatTypeId") Integer seatTypeId, @PathVariable("airplaneId") Integer airplaneId) {
+        return seatService.allSeatsForType(seatTypeId, airplaneId);
     }
 
     @CrossOrigin
