@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  spring-boot-app:
+    image: api-airlines
+    ports:
+      - "8023:8023"
+    networks:
+      - spring_network
+    depends_on:
+      - image-mysql-local
+
+  image-mysql-local:
+    image: mysql:8.0
+    restart: always # Reiniciar el contenedor automáticamente en caso de fallo
+    environment:
+      MYSQL_DATABASE: 'airline_local'
+      MYSQL_USER: 'dockerdb'
+      MYSQL_PASSWORD: 'dockerdb'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3306:3306" # Puerto en el host : Puerto en el contenedor
+    volumes:
+      - C:/ProgramData/MySQL/mysql_data:/var/lib/mysql # Volumen para persistir los datos de MySQL
+
+    networks:
+      - spring_network
+
+networks:
+  spring_network:
+volumes:
+  mysql_data: # Definición del volumen
